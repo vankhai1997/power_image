@@ -36,17 +36,17 @@ abstract class PowerImageProvider extends ImageProviderExt<PowerImageProvider> {
   PowerImageProvider(this.options, {this.scale = 1.0});
 
   double scale;
-
-  @override
-  ImageStreamCompleter load(PowerImageProvider key, DecoderCallback? decode) {
-    _completer = OneFrameImageStreamCompleter(_loadAsync(key, decode));
+@override
+  ImageStreamCompleter loadImage(PowerImageProvider key, ImageDecoderCallback decode) {
+  _completer = OneFrameImageStreamCompleter(_loadAsync(key, decode));
     return _completer!;
   }
+
 
   ImageStreamCompleter? _completer;
 
   Future<ImageInfo> _loadAsync(
-      PowerImageProvider key, DecoderCallback? decode) async {
+      PowerImageProvider key, ImageDecoderCallback? decode) async {
     try {
       PowerImageCompleter powerImageCompleter =
           PowerImageLoader.instance.loadImage(options);
