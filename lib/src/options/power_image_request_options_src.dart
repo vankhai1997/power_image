@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
+import 'package:power_image/power_image.dart';
 ///
 /// this is abstract class for custom Src to native laoder
 ///

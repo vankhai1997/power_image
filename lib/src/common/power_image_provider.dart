@@ -80,7 +80,7 @@ abstract class PowerImageProvider extends ImageProviderExt<PowerImageProvider> {
       // have had a chance to track the key in the cache at all.
       // Schedule a microtask to give the cache a chance to add the key.
       scheduleMicrotask(() {
-        PaintingBinding.instance!.imageCache!.evict(key);
+        PaintingBinding.instance.imageCache.evict(key);
       });
       rethrow;
     } finally {
@@ -111,6 +111,46 @@ abstract class PowerImageProvider extends ImageProviderExt<PowerImageProvider> {
 
   @override
   void dispose() {}
+
+}
+int hashValues(Object? arg01, [Object? arg02, Object? arg03, Object? arg04,
+  Object? arg05, Object? arg06, Object? arg07, Object? arg08,
+  Object? arg09, Object? arg10, Object? arg11, Object? arg12,
+  Object? arg13, Object? arg14, Object? arg15, Object? arg16,
+  Object? arg17, Object? arg18, Object? arg19, Object? arg20]) {
+  int result = 0;
+  void combine(Object? arg) {
+    result = 0x1fffffff & (result + arg.hashCode);
+    result = 0x1fffffff & (result + ((0x0007ffff & result) << 10));
+    result ^= (result >> 6);
+  }
+  void finish() {
+    result = 0x1fffffff & (result + ((0x03ffffff & result) << 3));
+    result ^= (result >> 11);
+    result = 0x1fffffff & (result + ((0x00003fff & result) << 15));
+  }
+  combine(arg01);
+  combine(arg02);
+  combine(arg03);
+  combine(arg04);
+  combine(arg05);
+  combine(arg06);
+  combine(arg07);
+  combine(arg08);
+  combine(arg09);
+  combine(arg10);
+  combine(arg11);
+  combine(arg12);
+  combine(arg13);
+  combine(arg14);
+  combine(arg15);
+  combine(arg16);
+  combine(arg17);
+  combine(arg18);
+  combine(arg19);
+  combine(arg20);
+  finish();
+  return result;
 }
 
 class PowerImageLoadException implements Exception {
